@@ -1,7 +1,6 @@
-#include "shell.h"
+ #include "shell.h"
 
-#define MAX_LIMIT 32
-extern char **environ;
+#define MAX_LIMIT 100
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
@@ -11,40 +10,53 @@ void shell_interpreter(char *entry, size_t vol)
 {
 	int status, i;
 	char *token;
-	char *argv[MAX_LIMIT];
+	char *args[MAX_LIMIT];
 	pid_t pid;
 
-	printf("#raji_manass!$ ");
-	while(getline(&entry, &vol, stdin) != EOF)
+	printf("#Raji~Manass!$ ");
+	while (1)
 	{
-		token = strtok(entry, " \n");
+		if(getline(&entry, &vol, stdin) == EOF)
+		{
+			printf("\n");
+			free(entry);
+			exit(1);
+		}
+		entry[strcspn(entry, "\n")] = 0;
+		if (strcspn(entry, "exit") == 0)
+		{
+			free(entry);
+			return;
+		}
+		token = strtok(entry, " ");
 		while (token != NULL)
 		{
-			argv[i] = token;
+			i = 0;
+		
+			args[i] = token;
 			i++;
-			token = strtok(NULL, " \n");
+			token = strtok(NULL, " ");
 		}
-		argv[i] = NULL;
+		args[i] = NULL;
 
 		pid = fork();
 
 		if (pid < 0)
 		{
 			perror("fork");
+			free(entry);
 			exit(1);
 		}
 		else if (pid == 0)
 		{
-			if (execve(argv[0], argv, environ) == -1)
-			{
-				perror("execve");
-				free(entry);
-				exit(1);
-			}
+			execve(args[0], args, NULL);
+			perror("./shs");
+			free(entry);
+			exit(1);
 		}
 		else
 			waitpid(pid, &status, 0);
 
-		printf("#raji_manass!$ ");
+		printf("#Raji~Manass!$ ");
 	}
 }
