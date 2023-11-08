@@ -2,8 +2,12 @@
 
 #define MAX_LIMIT 100
 
+void shell_interpreter(char *entry, size_t vol);
+
 /**
  * shell_interpreter - Interpretes user input from shell input.
+ * @entry: User input
+ * @vol: Size o9f command
  */
 
 void shell_interpreter(char *entry, size_t vol)
@@ -16,7 +20,7 @@ void shell_interpreter(char *entry, size_t vol)
 	printf("#Raji~Manass!$ ");
 	while (1)
 	{
-		if(getline(&entry, &vol, stdin) == EOF)
+		if (getline(&entry, &vol, stdin) == EOF)
 		{
 			printf("\n");
 			free(entry);
@@ -32,13 +36,11 @@ void shell_interpreter(char *entry, size_t vol)
 		while (token != NULL)
 		{
 			i = 0;
-		
 			args[i] = token;
 			i++;
 			token = strtok(NULL, " ");
 		}
 		args[i] = NULL;
-
 		pid = fork();
 
 		if (pid < 0)
