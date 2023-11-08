@@ -8,6 +8,7 @@ int main(void)
 	while (true)
 	{
 		shell_interpreter(entry, size);
+		handle_arg(entry, size);
 	}
 
 
