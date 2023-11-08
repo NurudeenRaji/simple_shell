@@ -1,7 +1,5 @@
  #include "shell.h"
 
-#define MAX_LIMIT 100
-
 void shell_interpreter(char *entry, size_t vol);
 
 /**
@@ -12,9 +10,9 @@ void shell_interpreter(char *entry, size_t vol);
 
 void shell_interpreter(char *entry, size_t vol)
 {
-	int status, i;
+	int status;
 	char *token;
-	char *args[MAX_LIMIT];
+	char *args[2];
 	pid_t pid;
 
 	printf("#Raji~Manass!$ ");
@@ -35,12 +33,10 @@ void shell_interpreter(char *entry, size_t vol)
 		token = strtok(entry, " ");
 		while (token != NULL)
 		{
-			i = 0;
-			args[i] = token;
-			i++;
+			args[0] = token;
 			token = strtok(NULL, " ");
 		}
-		args[i] = NULL;
+		args[1] = NULL;
 		pid = fork();
 
 		if (pid < 0)
@@ -52,7 +48,7 @@ void shell_interpreter(char *entry, size_t vol)
 		else if (pid == 0)
 		{
 			execve(args[0], args, NULL);
-			perror("./shs");
+			perror("./shell");
 			free(entry);
 			exit(1);
 		}
