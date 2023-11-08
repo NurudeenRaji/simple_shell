@@ -1,4 +1,4 @@
 !#/bash/bin
 git add .
-git commit -m "update"
+git commit -m "Simple shell"
 git push
