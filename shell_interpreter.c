@@ -20,7 +20,7 @@ void shell_interpreter(char *entry, size_t vol)
         if (getline(&entry, &vol, stdin) == EOF)
         {
                 printf("\n");
-                /*free(entry);*/
+                free(entry);
                 exit(1);
         }
         entry[strcspn(entry, "\n")] = '\0';
@@ -35,6 +35,7 @@ void shell_interpreter(char *entry, size_t vol)
         while (token != NULL)
         {
                 args[i] = token;
+		i++;
                 token = strtok(NULL, " ");
         }
         args[i] = NULL;
@@ -43,14 +44,14 @@ void shell_interpreter(char *entry, size_t vol)
         if (pid < 0)
         {
                 perror("fork");
-                /*free(entry);*/
+                free(entry);
                 exit(1);
         }
         else if (pid == 0)
         {
                 execve(args[0], args, NULL);
                 perror("./shell");
-                /*free(entry);*/
+                free(entry);
                 exit(1);
         }
         else
