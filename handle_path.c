@@ -11,7 +11,7 @@ void handle_path(char *entry, size_t len)
 
 	while (flag == 1)
 	{
-		printf("#Raji~Manass!# ");
+		shell_prompt();
 		getline(&entry, &len, stdin);
 		entry[strcspn(enty, '\n')] = '\0';
 		path = getenv("PATH");
