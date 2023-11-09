@@ -1,5 +1,7 @@
 #include "shell.h"
 
+#define MAX_LIMIT 256
+
 void shell_interpreter(char *entry, size_t vol);
 
 /**
@@ -10,15 +12,15 @@ void shell_interpreter(char *entry, size_t vol);
 
 void shell_interpreter(char *entry, size_t vol)
 {
-        char *args[2];
+        char *args[MAX_LIMIT];
         char *token;
         pid_t pid;
-        int status;
+        int i, status;
 
         if (getline(&entry, &vol, stdin) == EOF)
         {
                 printf("\n");
-                free(entry);
+                /*free(entry);*/
                 exit(1);
         }
         entry[strcspn(entry, "\n")] = '\0';
@@ -29,25 +31,26 @@ void shell_interpreter(char *entry, size_t vol)
         }
 
         token = strtok(entry, " ");
+	i = 0;
         while (token != NULL)
         {
-                args[0] = token;
+                args[i] = token;
                 token = strtok(NULL, " ");
         }
-        args[1] = NULL;
+        args[i] = NULL;
         pid = fork();
 
         if (pid < 0)
         {
                 perror("fork");
-                free(entry);
+                /*free(entry);*/
                 exit(1);
         }
         else if (pid == 0)
         {
                 execve(args[0], args, NULL);
                 perror("./shell");
-                free(entry);
+                /*free(entry);*/
                 exit(1);
         }
         else
