@@ -13,7 +13,7 @@ void handle_path(char *entry, size_t len)
 	{
 		shell_prompt();
 		getline(&entry, &len, stdin);
-		entry[strcspn(enty, '\n')] = '\0';
+		entry[strcspn(entry, '\n')] = '\0';
 		path = getenv("PATH");
 		dr =strtok(path, ":");
 		while (dr != NULL)
