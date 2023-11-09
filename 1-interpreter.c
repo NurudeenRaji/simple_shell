@@ -1,4 +1,5 @@
  #include "shell.h"
+#define MAX_LIMIT 32
 
 void shell_interpreter(char *entry, size_t vol);
 
@@ -12,7 +13,7 @@ void shell_interpreter(char *entry, size_t vol)
 {
 	int status;
 	char *token;
-	char *args[2];
+	char *args[MAX_LIMIT];
 	pid_t pid;
 
 	printf("#Raji~Manass!$ ");
@@ -54,7 +55,6 @@ void shell_interpreter(char *entry, size_t vol)
 		}
 		else
 			waitpid(pid, &status, 0);
-
-		printf("#Raji~Manass!$ ");
+		 printf("#Raji~Manass!$ ");
 	}
 }

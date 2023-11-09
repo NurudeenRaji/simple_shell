@@ -12,4 +12,5 @@
 
 void shell_interpreter(char *entry, size_t vol);
 void handle_arg(char *entry, size_t vol);
+void handle_path(int argc, char *argv[]);
 #endif

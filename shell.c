@@ -1,14 +1,19 @@
 #include "shell.h"
-
-int main(void)
+#define MAX_LIMIT 32
+int main(int argc, char *argv[])
 {
-	char *entry = NULL;
-	size_t size = 0;
+	char *entry = (char *)malloc(MAX_LIMIT * sizeof(char));
+	size_t vol = MAX_LIMIT;
 
-	while (true)
+
+	while (1)
 	{
-		shell_interpreter(entry, size);
-		handle_arg(entry, size);
+		shell_interpreter(entry, vol);
+		handle_arg(entry, vol);
+		handle_path(argc, argv);
+		if (strcmp(entry, "exit") == 0) {
+			break;
+		}
 	}
 
 
