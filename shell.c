@@ -7,13 +7,10 @@ int main(void)
 	char *entry = NULL; /*(char *)malloc(MAX_LIMIT * sizeof(char));*/
 	size_t vol = 0;/*MAX_LIMIT;*/
 
-
 	while (1)
 	{
-		shell_display();
+	/*	shell_display();*/
 		shell_interpreter(entry, vol);
 	}
-
-
 	return (0);
 }
