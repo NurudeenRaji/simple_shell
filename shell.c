@@ -9,7 +9,7 @@ int main(void)
 
 	while (1)
 	{
-	/*	shell_display();*/
+		shell_prompt();
 		shell_interpreter(entry, vol);
 	}
 	return (0);

@@ -17,10 +17,6 @@ void shell_interpreter(char *entry, size_t vol)
 	pid_t pid;
 	int i, status;
 
-	if (isatty(STDIN_FILENO))
-	{
-		printf("#Raji~Manass!$ ");
-	}
 	if (getline(&entry, &vol, stdin) == EOF)
 	{
 		free(entry);
@@ -52,15 +48,6 @@ void shell_interpreter(char *entry, size_t vol)
 	}
 	else if (pid == 0)
 	{
-		int fd = dup(1);
-
-		close(1);
-		if (dup2(fd, 1) == -1)
-		{
-			perror("dup2");
-			free(entry);
-			exit(1);
-		}
 		execve(args[0], args, NULL);
 		perror("./shell");
 		free(entry);
