@@ -11,7 +11,7 @@ void shell_interpreter(char *entry, size_t vol);
  */
 
 void shell_interpreter(char *entry, size_t vol)
-{       
+{
 	char *args[MAX_LIMIT];
 	char *token;
 	pid_t pid;
@@ -53,8 +53,9 @@ void shell_interpreter(char *entry, size_t vol)
 	else if (pid == 0)
 	{
 		int fd = dup(1);
+
 		close(1);
-		if (dup2(fd,1) == -1)
+		if (dup2(fd, 1) == -1)
 		{
 			perror("dup2");
 			free(entry);
