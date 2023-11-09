@@ -1,71 +1,51 @@
 #include "shell.h"
 
-#define MAX_ARGS 10
-#define MAX_LEN 1024
+void handle_path(char *entry, size_t len);
 
-void handle_path(int argc, char *argv[]);
-
-extern char **environ;
-
-void handle_path(int argc, char *argv[])
+void handle_path(char *entry, size_t len)
 {
-	char *entry[MAX_ARGS];
-	char *path;
-	char *token;
-	char len[MAX_LEN];
-	int i, y;
+	char *path, *dr, *entry[] = "";
+	size_t len = 0;
+	int status, flag = 1;
 	pid_t pid;
 
-	if (argc < 2)
+	while (flag == 1)
 	{
-		printf("Usage: %s command [args...]\n", argv[0]);
-		exit(1);
-	}
-	i = 0;
-	for (y = 1; y < argc && y < MAX_ARGS - 1; y++)
-	{
-		if (strcmp(argv[y], "-h") == 0 || strcmp(argv[y], "--help") == 0)
+		printf("#Raji~Manass!# ");
+		getline(&entry, $len, stdin);
+		entry[strcspn(enty, '\n')] = '\0';
+		path = getenv("PATH");
+		dr =strtok(path, ":");
+		while (dr != NULL)
 		{
-			printf("Usage: %s command [args...]\n", argv[0]);
-			exit(0);
+			char *f_path= malloc(strlen(dr) + strlen(entry) + 2);
+			strcpy(f_path, dr);
+			strcat(f_path, "/");
+			strcat(f_path, entry);
+			if (access(f_path, X_OK) == 0)
+			{
+				pid = fork();
+				if (pid == -1)
+				{
+					perror("Error:");
+					return (1);
+				}
+				if (pid == 0)
+				{
+					if (execve(f_path, entry, NULL) == -1)
+					{
+						perror("Error:");
+					}
+				}
+				else
+				{
+					wait(&status);
+				}
+				free(f_path);
+				break;
+			}
+			free(f_path);
+			dr = strtok(NULL, ":");
 		}
-		else
-		{
-			entry[i] = argv[y];
-			i++;
-		}
-	}
-	entry[i] = NULL;
-	path = getenv("PATH");
-	token = strtok(path, ":");
-	while (token != NULL)
-	{
-		snprintf(len, MAX_LEN, "%s/%s", token, entry[0]);
-		if (access(len, X_OK) == 0)
-		{
-			break;
-		}
-		token = strtok(NULL, ":");
-	}
-	if (token == NULL)
-	{
-		printf("%s: command not found\n", entry[0]);
-		exit(1);
-	}
-	pid = fork();
-	if (pid == -1)
-	{
-		perror("fork");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		execve(len, entry, environ);
-		perror("execve");
-		exit(1);
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
 	}
 }
