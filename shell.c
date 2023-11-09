@@ -7,6 +7,7 @@ int main(void)
 
 	while (true)
 	{
+		shell_display();
 		shell_interpreter(entry, size);
 	}
 

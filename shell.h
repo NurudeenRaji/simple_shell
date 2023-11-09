@@ -11,6 +11,6 @@
 #include <sys/stat.h>
 
 void shell_interpreter(char *entry, size_t vol);
-
+void shell_display(void);
 
 #endif
