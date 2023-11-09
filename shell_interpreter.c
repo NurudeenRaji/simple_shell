@@ -1,6 +1,9 @@
 #include "shell.h"
 
+#define MAX_LIMIT 128
+
 void shell_interpreter(char *entry, size_t vol);
+void shell_execute(char  *entry);
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
@@ -8,13 +11,8 @@ void shell_interpreter(char *entry, size_t vol);
  * @vol: Size of command
  */
 
-void shell_interpreter(char *entry, size_t vol)
+char *shell_interpreter(char *entry, size_t vol)
 {
-	char *args[2];
-        char *token;
-        pid_t pid;
-        int status;
-
 	if (getline(&entry, &vol, stdin) == EOF)
 	{
 		printf("\n");
@@ -27,11 +25,22 @@ void shell_interpreter(char *entry, size_t vol)
 		free(entry);
 		return;
 	}
+	return (entry);
+}
+
+void shell_execute(char  *entry)
+{
+	char *args[MAX_LIMIT];
+        char *token;
+        pid_t pid;
+        int i, status;
 
         token = strtok(entry, " ");
-        while (token != NULL)
+        i = 0;
+	while (token != NULL)
         {
-                args[0] = token;
+                args[i] = token;
+		i++;
                 token = strtok(NULL, " ");
         }
         args[1] = NULL;
