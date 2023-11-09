@@ -12,7 +12,7 @@ void handle_path(char *entry, size_t len)
 	while (flag == 1)
 	{
 		printf("#Raji~Manass!# ");
-		getline(&entry, $len, stdin);
+		getline(&entry, &len, stdin);
 		entry[strcspn(enty, '\n')] = '\0';
 		path = getenv("PATH");
 		dr =strtok(path, ":");
