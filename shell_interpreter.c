@@ -2,7 +2,6 @@
 
 #define MAX_LIMIT 256
 
-void shell_interpreter(char *entry, size_t vol);
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
