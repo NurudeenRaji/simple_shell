@@ -1,7 +1,6 @@
 #include "shell.h"
 
 void shell_interpreter(char *entry, size_t vol);
-void shell_execute(char **args);
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
@@ -45,6 +44,7 @@ void shell_interpreter(char *entry, size_t vol)
 	}
 	args[i] = NULL;
 	shell_execute(args);
+
 	free(entry);
 	free(entry_copy);
 	for (j = 0; j < i; j++)
@@ -52,41 +52,3 @@ void shell_interpreter(char *entry, size_t vol)
 	free(args);
 }
 
-void shell_execute(char **args)
-{
-	pid_t pid;
-	int status;
-
-	char *entry = NULL;
-	char *new_entry = NULL;
-
-	if (args != NULL)
-	{
-		entry = args[0];
-	}
-
-	if (entry != NULL)
-		new_entry = handle_path(entry);
-
-	pid = fork();
-
-	if (pid < 0)
-	{
-		perror("Fork");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		if (new_entry != NULL)
-		{
-			if (execve(new_entry, args, NULL) == -1)
-			{
-				perror("Err:");
-			}
-		}
-	}
-	else
-	{
-		waitpid(pid, &status, 0);
-	}
-}

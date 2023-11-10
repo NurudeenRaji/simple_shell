@@ -12,7 +12,6 @@ int main(int ac, char **av)
 	{
 		shell_prompt();
 		shell_interpreter(input, size);
-		/*handle_path(input, size);*/
 	}
 
 	return (0);
