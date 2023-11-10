@@ -36,7 +36,6 @@ void shell_input(char *entry, size_t vol)
 	i = 0;
 	while (token != NULL)
 	{
-		/*args[i] = token;*/
 		args[i] = malloc(sizeof(char *) * (strlen(token) + 1));
 		strcpy(args[i], token);
 		i++;
