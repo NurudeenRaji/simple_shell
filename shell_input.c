@@ -1,6 +1,6 @@
 #include "shell.h"
 
-void shell_interpreter(char *entry, size_t vol);
+void shell_input(char *entry, size_t vol);
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
@@ -8,7 +8,7 @@ void shell_interpreter(char *entry, size_t vol);
  * @vol: Size of command
  */
 
-void shell_interpreter(char *entry, size_t vol)
+void shell_input(char *entry, size_t vol)
 {
 	char **args;
 	char *token, *entry_copy;

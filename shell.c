@@ -11,7 +11,7 @@ int main(int ac, char **av)
 	while (true)
 	{
 		shell_prompt();
-		shell_interpreter(input, size);
+		shell_input(input, size);
 	}
 
 	return (0);
