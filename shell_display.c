@@ -2,5 +2,8 @@
 
 void shell_display(void)
 {
-	printf("#Raji~Manass!$ ");
+        if (isatty(STDIN_FILENO))
+        {
+                printf("#Raji~Manass!$ ");
+        }
 }

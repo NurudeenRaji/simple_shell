@@ -2,7 +2,7 @@
 
 #define MAX_LIMIT 128
 
-void shell_interpreter(char *entry, size_t vol);
+char *shell_interpreter(char *entry, size_t vol);
 void shell_execute(char  *entry);
 
 /**
@@ -15,15 +15,15 @@ char *shell_interpreter(char *entry, size_t vol)
 {
 	if (getline(&entry, &vol, stdin) == EOF)
 	{
-		printf("\n");
+		/*printf("\n");*/
 		free(entry);
 		exit(1);
 	}
 	entry[strcspn(entry, "\n")] = '\0';
-	if (strcspn(entry, "exit") == 0)
+	if (strcmp(entry, "exit") == 0)
 	{
 		free(entry);
-		return;
+		return (NULL);
 	}
 	return (entry);
 }
@@ -43,7 +43,7 @@ void shell_execute(char  *entry)
 		i++;
                 token = strtok(NULL, " ");
         }
-        args[1] = NULL;
+        args[i] = NULL;
         pid = fork();
 
         if (pid < 0)
@@ -60,5 +60,8 @@ void shell_execute(char  *entry)
                 exit(1);
         }
         else
-                waitpid(pid, &status, 0);	
+	{
+                waitpid(pid, &status, 0);
+		free(entry);
+	}
 }
