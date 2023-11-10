@@ -11,7 +11,7 @@
 #include <sys/stat.h>
 
 void shell_display(void);
-char *shell_interpreter(char *entry, size_t vol);
-void shell_execute(char  *entry);
+void shell_interpreter(char *entry, size_t vol);
+void shell_execute(char **entry);
 
 #endif

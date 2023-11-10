@@ -1,19 +1,22 @@
 #include "shell.h"
 
 
-int main(void)
+int main(int ac, char **av)
 {
 	size_t size = 0;
-	char *entry = malloc(sizeof(char) * 1024);
+	char *entry = NULL;
+
+	(void)ac;
+	(void)av;
 
 	while (true)
 	{
 		shell_display();	
-		entry = shell_interpreter(entry, size);
-		shell_execute(entry);
+		shell_interpreter(entry, size);
+		/*shell_execute(entry);*/
 
 	}
-
+	free(entry);
 
 	return (0);
 }

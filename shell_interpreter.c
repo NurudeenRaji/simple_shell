@@ -1,9 +1,7 @@
 #include "shell.h"
 
-#define MAX_LIMIT 128
-
-char *shell_interpreter(char *entry, size_t vol);
-void shell_execute(char  *entry);
+void shell_interpreter(char *entry, size_t vol);
+void shell_execute(char **args);
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
@@ -11,32 +9,27 @@ void shell_execute(char  *entry);
  * @vol: Size of command
  */
 
-char *shell_interpreter(char *entry, size_t vol)
+void shell_interpreter(char *entry, size_t vol)
 {
-	if (getline(&entry, &vol, stdin) == EOF)
+	char **args;
+        char *token;
+       	ssize_t output;
+	int i;
+
+	output = getline(&entry, &vol, stdin);
+	if (output == EOF)
 	{
 		/*printf("\n");*/
-		free(entry);
-		exit(1);
+		return;
 	}
 	entry[strcspn(entry, "\n")] = '\0';
-	if (strcmp(entry, "exit") == 0)
-	{
-		free(entry);
-		return (NULL);
-	}
-	return (entry);
-}
 
-void shell_execute(char  *entry)
-{
-	char *args[MAX_LIMIT];
-        char *token;
-        pid_t pid;
-        int i, status;
 
         token = strtok(entry, " ");
-        i = 0;
+
+	args = malloc(sizeof(char *) * strlen(entry));
+        
+	i = 0;
 	while (token != NULL)
         {
                 args[i] = token;
@@ -44,6 +37,21 @@ void shell_execute(char  *entry)
                 token = strtok(NULL, " ");
         }
         args[i] = NULL;
+
+	shell_execute(args);
+}
+
+void shell_execute(char **args)
+{
+	pid_t pid;
+        int status;
+	
+	char *entry = NULL;
+	
+	if (args)
+	{
+		entry = args[0];
+	}
         pid = fork();
 
         if (pid < 0)
@@ -54,14 +62,14 @@ void shell_execute(char  *entry)
         }
         else if (pid == 0)
         {
-                execve(args[0], args, NULL);
+                execve(entry, args, NULL);
                 perror("./shell");
-                free(entry);
+		/*free(entry);*/
                 exit(1);
         }
         else
 	{
                 waitpid(pid, &status, 0);
-		free(entry);
+		/*free(entry);*/
 	}
 }
