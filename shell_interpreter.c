@@ -1,8 +1,7 @@
 #include "shell.h"
 
-#define MAX_LIMIT 256
-
 void shell_interpreter(char *entry, size_t vol);
+void shell_execute(char **args);
 
 /**
  * shell_interpreter - Interpretes user input from shell input.
@@ -12,24 +11,24 @@ void shell_interpreter(char *entry, size_t vol);
 
 void shell_interpreter(char *entry, size_t vol)
 {
-        char *args[MAX_LIMIT];
+        char **args;
         char *token;
-        pid_t pid;
-        int i, status;
+        ssize_t output;
+        int i;
 
-        if (getline(&entry, &vol, stdin) == EOF)
+        output = getline(&entry, &vol, stdin);
+        if (output == EOF)
         {
-                free(entry);
-                exit(1);
-        }
-        entry[strcspn(entry, "\n")] = 0;
-        if (strcspn(entry, "exit") == 0)
-        {
-                free(entry);
+                /*printf("\n");*/
                 return;
         }
+        entry[strcspn(entry, "\n")] = '\0';
+
 
         token = strtok(entry, " ");
+
+        args = malloc(sizeof(char *) * strlen(entry));
+
         i = 0;
         while (token != NULL)
         {
@@ -38,6 +37,25 @@ void shell_interpreter(char *entry, size_t vol)
                 token = strtok(NULL, " ");
         }
         args[i] = NULL;
+
+        shell_execute(args);
+}
+
+void shell_execute(char **args)
+{
+        pid_t pid;
+        int status;
+
+        char *entry = NULL;
+	char *new_entry = NULL;
+
+        if (args)
+        {
+                entry = args[0];
+        }
+
+	new_entry = handle_path(entry);
+
         pid = fork();
 
         if (pid < 0)
@@ -48,14 +66,14 @@ void shell_interpreter(char *entry, size_t vol)
         }
         else if (pid == 0)
         {
-                execve(args[0], args, NULL);
+                execve(new_entry, args, NULL);
                 perror("./shell");
-                free(entry);
+                /*free(entry);*/
                 exit(1);
         }
         else
         {
                 waitpid(pid, &status, 0);
-                free(entry);
+                /*free(entry);*/
         }
 }

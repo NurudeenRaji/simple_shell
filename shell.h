@@ -12,6 +12,6 @@
 
 void shell_prompt(void);
 void shell_interpreter(char *entry, size_t vol);
-void handle_path(char *entry, size_t len);
+char *handle_path(char *entry);
 
 #endif
