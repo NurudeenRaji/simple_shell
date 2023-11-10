@@ -13,7 +13,7 @@ char *handle_path(char *entry)
 
 	while (dir != NULL)
 	{
-		char *new_path = malloc(strlen(dir) + strlen(entry) + 2);
+		new_path = malloc(strlen(dir) + strlen(entry) + 2);
 		strcpy(new_path, dir);
 		strcat(new_path, "/");
 		strcat(new_path, entry);
@@ -30,4 +30,6 @@ char *handle_path(char *entry)
 			dir = strtok(NULL, ":");
 		}
 	}
+	return (NULL);
+
 }
