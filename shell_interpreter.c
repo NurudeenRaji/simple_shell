@@ -12,35 +12,44 @@ void shell_execute(char **args);
 void shell_interpreter(char *entry, size_t vol)
 {
 	char **args;
-	char *token;
+	char *token, *entry_copy;
 	ssize_t output;
-	int i;
+	int i, j, count;
 
 	output = getline(&entry, &vol, stdin);
 	if (output == EOF)
-	{
-		/*printf("\n");*/
-		return;
-	}
+		exit(1);
+
 	entry[strcspn(entry, "\n")] = '\0';
 
+	entry_copy = strdup(entry);
 
 	token = strtok(entry, " ");
-
-	args = malloc(sizeof(char *) * strlen(entry));
-
+	count = 0;
+	while (token != NULL)
+	{
+		count++;
+		token = strtok(NULL, " ");
+	}
+	count++;
+	args = malloc(sizeof(char *) * count);
+	token = strtok(entry_copy, " ");
 	i = 0;
 	while (token != NULL)
 	{
-		args[i] = token;
-		/*args[i] = malloc(sizeof(char *) * strlen(token));
-		strcpy(args[i], token);*/
+		/*args[i] = token;*/
+		args[i] = malloc(sizeof(char *) * (strlen(token) + 1));
+		strcpy(args[i], token);
 		i++;
 		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
-
 	shell_execute(args);
+	free(entry);
+	free(entry_copy);
+	for (j = 0; j < i; j++)
+		free(args[j]);
+	free(args);
 }
 
 void shell_execute(char **args)
@@ -51,33 +60,33 @@ void shell_execute(char **args)
 	char *entry = NULL;
 	char *new_entry = NULL;
 
-	if (args)
+	if (args != NULL)
 	{
 		entry = args[0];
 	}
 
-	new_entry = handle_path(entry);
+	if (entry != NULL)
+		new_entry = handle_path(entry);
 
 	pid = fork();
 
 	if (pid < 0)
 	{
-		perror("fork");
-		free(entry);
+		perror("Fork");
 		exit(1);
 	}
 	else if (pid == 0)
 	{
-		if (execve(new_entry, args, NULL) == -1)
+		if (new_entry != NULL)
 		{
-			perror("./shell");
-			/*free(entry);*/
-			exit(1);
+			if (execve(new_entry, args, NULL) == -1)
+			{
+				perror("Err:");
+			}
 		}
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		/*free(entry);*/
 	}
 }

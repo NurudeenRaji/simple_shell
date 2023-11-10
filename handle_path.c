@@ -17,10 +17,12 @@ char *handle_path(char *entry)
 		while (dir != NULL)
 		{
 			new_path = malloc(strlen(dir) + strlen(entry) + 2);
+			if (new_path == NULL)
+				return (NULL);
 			strcpy(new_path, dir);
 			strcat(new_path, "/");
 			strcat(new_path, entry);
-			/*strcat(new_path, "\0");*/
+			strcat(new_path, "\0");
 
 			if (stat(new_path, &check) == 0)
 			{
@@ -33,6 +35,7 @@ char *handle_path(char *entry)
 				dir = strtok(NULL, ":");
 			}
 		}
+			free(path_dup);
 
 			if (stat(entry, &check) == 0)
 			{
