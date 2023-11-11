@@ -1,8 +1,8 @@
 #include "shell.h"
 
-void shl_env(void)
+void shl_env(char *env)
 {
-	char *entry;
+	char *env = NULL;
 	int flag = 1;
 	char **ev = environ;
 

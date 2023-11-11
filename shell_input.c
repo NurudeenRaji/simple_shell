@@ -21,6 +21,11 @@ void shell_input(char *entry, size_t vol)
 
 	entry[strcspn(entry, "\n")] = '\0';
 
+	if (entry[0] == '\0')
+	{
+		return;
+	}
+
 	entry_copy = strdup(entry);
 
 	token = strtok(entry, " ");
@@ -43,6 +48,7 @@ void shell_input(char *entry, size_t vol)
 	}
 	args[i] = NULL;
 	shell_execute(args);
+	exit_shell(args);
 
 	free(entry);
 	free(entry_copy);

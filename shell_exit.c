@@ -1,12 +1,13 @@
 #include "shell.h"
 
-void quit_shell(int quit)
+void exit_shell(char **args)
 {
-	char entry;
 
-	if (strcmp(entry, "exit\n") == 0)
-	{
-		exit_shell(quit);
+	if (args != NULL && args[0] != NULL)
+        {
+		if (strcmp(args[0], "exit") == 0)
+		{
+			exit(1);
+		}
 	}
-	exit(1);
 }
