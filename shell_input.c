@@ -48,6 +48,7 @@ void shell_input(char *entry, size_t vol)
 	}
 	args[i] = NULL;
 	shell_execute(args);
+	print_env(args);
 	exit_shell(args);
 
 	free(entry);

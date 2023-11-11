@@ -1,23 +1,25 @@
 #include "shell.h"
 
-void shl_env(char *env)
-{
-	char *env = NULL;
-	int flag = 1;
-	char **ev = environ;
+extern char **environ;
 
-	while (*env)
+void print_env(char **args)
+{
+	int i, j;
+	char **env = environ;
+
+	j = 0;
+	while (args != NULL && args[j] != NULL)
 	{
-		printf("\n", *env++);
-	}
-	while (flag == 1)
-	{
-		call prompt;
-		geline(&entry, &len, stdin);
-		if (strcmp(entry, "env\n") == 0)
+		if (strcmp(args[j], "env") == 0)
 		{
-			shl_vnv();
+			i = 0;
+			while (env[i] != NULL)
+			{
+				printf("%s\n", env[i]);
+				i++;
+			}
 		}
+		j++;
 	}
 }
 
