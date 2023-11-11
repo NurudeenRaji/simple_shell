@@ -2,12 +2,11 @@
 
 void exit_shell(char **args)
 {
-
-	if (args != NULL && args[0] != NULL)
+	while (args != NULL && args[0] != NULL)
         {
 		if (strcmp(args[0], "exit") == 0)
 		{
-			exit(1);
+			exit(0);
 		}
 	}
 }

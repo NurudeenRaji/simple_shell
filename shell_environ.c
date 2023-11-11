@@ -22,4 +22,3 @@ void print_env(char **args)
 		j++;
 	}
 }
-
