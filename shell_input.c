@@ -21,6 +21,11 @@ void shell_input(char *entry, size_t vol)
 
 	entry[strcspn(entry, "\n")] = '\0';
 
+	if (entry[0] == '\0')
+	{
+		return;
+	}
+
 	entry_copy = strdup(entry);
 
 	token = strtok(entry, " ");
@@ -36,7 +41,6 @@ void shell_input(char *entry, size_t vol)
 	i = 0;
 	while (token != NULL)
 	{
-		/*args[i] = token;*/
 		args[i] = malloc(sizeof(char *) * (strlen(token) + 1));
 		strcpy(args[i], token);
 		i++;
@@ -44,6 +48,8 @@ void shell_input(char *entry, size_t vol)
 	}
 	args[i] = NULL;
 	shell_execute(args);
+	print_env(args);
+	exit_shell(args);
 
 	free(entry);
 	free(entry_copy);
@@ -51,4 +57,3 @@ void shell_input(char *entry, size_t vol)
 		free(args[j]);
 	free(args);
 }
-
