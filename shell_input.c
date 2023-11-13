@@ -10,8 +10,7 @@ void shell_input(char *entry, size_t vol);
 
 void shell_input(char *entry, size_t vol)
 {
-	char **args;
-	char *token, *entry_copy;
+	char **args, *token, *entry_copy;
 	ssize_t output;
 	int i, j, count;
 
@@ -43,13 +42,14 @@ void shell_input(char *entry, size_t vol)
 	{
 		args[i] = malloc(sizeof(char *) * (strlen(token) + 1));
 		strcpy(args[i], token);
+		exit_shell(args);
 		i++;
 		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
 	shell_execute(args);
 	print_env(args);
-	exit_shell(args);
+	/*exit_shell(args);*/
 
 	free(entry);
 	free(entry_copy);

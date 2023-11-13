@@ -7,7 +7,6 @@ char *handle_path(char *entry)
 	char *path, *path_dup, *dir, *new_path;
 	struct stat check;
 
-
 	path = getenv("PATH");
 	if (path)
 	{
@@ -22,7 +21,6 @@ char *handle_path(char *entry)
 			strcpy(new_path, dir);
 			strcat(new_path, "/");
 			strcat(new_path, entry);
-			strcat(new_path, "\0");
 
 			if (stat(new_path, &check) == 0)
 			{
@@ -35,12 +33,14 @@ char *handle_path(char *entry)
 				dir = strtok(NULL, ":");
 			}
 		}
+
 			free(path_dup);
 
 			if (stat(entry, &check) == 0)
 			{
 				return (entry);
 			}
+
 		return (NULL);
 	}
 	return (NULL);

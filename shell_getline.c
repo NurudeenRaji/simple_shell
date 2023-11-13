@@ -18,5 +18,9 @@ char getline_shell()
         location = 0;
 
         return(cmd_line);
+
 }
-then put this in shell.h
+
+int _getline(char **line, int size)
+{
+

@@ -32,11 +32,15 @@ void shell_execute(char **args)
 			if (execve(new_entry, args, NULL) == -1)
 			{
 				perror("Err:");
+				free(new_entry);
+				_exit(EXIT_FAILURE);
 			}
+			/*free(new_entry);*/
 		}
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
+		/*free(new_entry);*/
 	}
 }
