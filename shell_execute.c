@@ -35,7 +35,6 @@ void shell_execute(char **args)
 				free(new_entry);
 				_exit(EXIT_FAILURE);
 			}
-			/*free(new_entry);*/
 		}
 	}
 	else
