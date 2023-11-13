@@ -33,7 +33,7 @@ void shell_execute(char **args)
 			{
 				perror("Err:");
 				free(new_entry);
-				_exit(EXIT_FAILURE);
+				/*_exit(EXIT_FAILURE);*/
 			}
 		}
 	}

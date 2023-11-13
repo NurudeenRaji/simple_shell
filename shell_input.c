@@ -40,19 +40,21 @@ void shell_input(char *entry, size_t vol)
 	i = 0;
 	while (token != NULL)
 	{
-		args[i] = malloc(sizeof(char *) * (strlen(token) + 1));
+		args[i] = malloc(sizeof(char) * (strlen(token) + 1));
 		strcpy(args[i], token);
-		exit_shell(args);
 		i++;
 		token = strtok(NULL, " ");
 	}
 	args[i] = NULL;
-	shell_execute(args);
-	print_env(args);
-	/*exit_shell(args);*/
 
 	free(entry);
 	free(entry_copy);
+
+	shell_execute(args);
+	print_env(args);
+
+	exit_shell(args);
+
 	for (j = 0; j < i; j++)
 		free(args[j]);
 	free(args);
