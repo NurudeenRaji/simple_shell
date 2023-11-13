@@ -12,6 +12,9 @@ int main(int ac, char **av)
 	{
 		shell_prompt();
 		shell_input(input, size);
+
+		free(input);
+		input = NULL;
 	}
 
 	return (0);

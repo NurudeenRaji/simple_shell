@@ -15,7 +15,6 @@ void shell_input(char *entry, size_t vol);
 void shell_execute(char **args);
 char *handle_path(char *entry);
 void print_env(char **args);
-void cleanup(char* entry, char* entry_copy, char** args, int i);
 void exit_shell(char **args);
 /*void exit_shell(char **args, char *entry, char *entry_copy, int i);*/
 
