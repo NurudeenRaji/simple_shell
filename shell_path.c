@@ -11,6 +11,12 @@ char *handle_path(char *entry)
 	if (path)
 	{
 		path_dup = strdup(path);
+		if (path_dup == NULL)
+		{
+			perror("strdup");
+			return (NULL);
+		}
+
 		dir = strtok(path_dup, ":");
 
 		while (dir != NULL)
@@ -38,7 +44,7 @@ char *handle_path(char *entry)
 
 			if (stat(entry, &check) == 0)
 			{
-				return strdup(entry);
+				return (entry);
 			}
 
 		return (NULL);

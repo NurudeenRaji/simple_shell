@@ -17,7 +17,7 @@ void shell_input(char *entry, size_t vol)
 	output = getline(&entry, &vol, stdin);
 	if (output == EOF)
 	{
-		perror("getline");
+		/*fprintf(stderr, "Error reading input: %s\n", strerror(errno));*/
 		exit(EXIT_FAILURE);
 	}
 
@@ -72,7 +72,6 @@ void shell_input(char *entry, size_t vol)
 	shell_execute(args);
 	print_env(args);
 
-	/*exit_shell(args);*/
 
 	for (j = 0; j < i; j++)
 		free(args[j]);
