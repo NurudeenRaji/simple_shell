@@ -22,7 +22,7 @@ void shell_execute(char **args)
 		new_entry = handle_path(entry);
 		if (new_entry == NULL)
 		{
-			fprintf(stderr, "Invalid command or '%s' path not handled!!! \n", entry);
+			fprintf(stderr, "hsh: Invalid command or '%s' path not handled!!! \n", entry);
 			return;
 		}
 	}
@@ -42,14 +42,15 @@ void shell_execute(char **args)
 			if (execve(new_entry, args, NULL) == -1)
 			{
 				perror("execve failed");
-				free(new_entry);
-				/*_exit(EXIT_FAILURE);*/
+				/*free(new_entry);*/
+				_exit(EXIT_FAILURE);
 			}
 			free(new_entry);
 		}
 	}
 	else
 	{
+		free(new_entry);
 		waitpid(pid, &status, 0);
 		/*free(new_entry);*/
 	}

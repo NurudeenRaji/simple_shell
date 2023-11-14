@@ -44,7 +44,7 @@ char *handle_path(char *entry)
 
 			if (stat(entry, &check) == 0)
 			{
-				return (entry);
+				return strdup(entry);
 			}
 
 		return (NULL);
