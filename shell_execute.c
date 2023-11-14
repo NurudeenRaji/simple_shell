@@ -42,7 +42,11 @@ void shell_execute(char **args)
 			if (execve(new_entry, args, NULL) == -1)
 			{
 				perror("execve failed");
+<<<<<<< HEAD
 				free(new_entry);
+=======
+				/*free(new_entry);*/
+>>>>>>> 66276c816f4c6fe1b6f3e9884f7e7fdbb118d3bb
 				_exit(EXIT_FAILURE);
 			}
 			free(new_entry);
@@ -50,6 +54,7 @@ void shell_execute(char **args)
 	}
 	else
 	{
+		free(new_entry);
 		waitpid(pid, &status, 0);
 		/*free(new_entry);*/
 	}
