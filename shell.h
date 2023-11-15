@@ -11,6 +11,7 @@
 #include <sys/types.h>
 #include <errno.h>
 
+void _printf(const char *str);
 void shell_prompt(void);
 char **shell_input(char *entry, size_t vol);
 void shell_execute(char **args);
