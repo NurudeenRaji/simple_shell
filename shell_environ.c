@@ -13,7 +13,7 @@ void print_env(char **args, char **env)
 	j = 0;
 	while (args != NULL && args[j] != NULL)
 	{
-		if (strcmp(args[1], "env") == 0)
+		if (strcmp(args[j], "env") == 0)
 		{
 			i = 0;
 			while (env[i] != NULL)
