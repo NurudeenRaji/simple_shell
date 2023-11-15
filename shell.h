@@ -12,10 +12,10 @@
 #include <errno.h>
 
 void shell_prompt(void);
-void shell_input(char *entry, size_t vol);
+char **shell_input(char *entry, size_t vol);
 void shell_execute(char **args);
 char *handle_path(char *entry);
-void print_env(char **args);
+void print_env(char **args, char **env);
 void exit_shell(char **args);
 ssize_t _getline(char **line, size_t *n, FILE *stream);
 

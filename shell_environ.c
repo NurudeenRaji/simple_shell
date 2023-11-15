@@ -3,21 +3,25 @@
 /**
  * print_env - A function that print the environment
  * @args: An input argument
+ * @env: the environment variable from main function.
  */
 
-int  print_env(int argc, char **argv, char **environ)
+void print_env(char **args, char **env)
 {
-	while (argc == 2 && strcmp(argv[1], "env") = 0)
+	int i, j;
+
+	j = 0;
+	while (args != NULL && args[j] != NULL)
 	{
-		while (*environ != NULL)
+		if (strcmp(args[1], "env") == 0)
 		{
-			printf("%s\n", *environ);
-			environ++;
+			i = 0;
+			while (env[i] != NULL)
+			{
+				printf("%s\n", env[i]);
+			i++;
+			}
 		}
+		j++;
 	}
-	else
-	{
-		printf("Err: invalid 'env'\n");
-	}
-	return (0);
 }
