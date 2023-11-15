@@ -17,6 +17,6 @@ void shell_execute(char **args);
 char *handle_path(char *entry);
 void print_env(char **args);
 void exit_shell(char **args);
-/*void exit_shell(char **args, char *entry, char *entry_copy, int i);*/
+ssize_t _getline(char **line, size_t *n, FILE *stream);
 
 #endif

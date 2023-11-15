@@ -49,7 +49,6 @@ void shell_execute(char **args)
 			{
 				perror("execve failed");
 				free(new_entry);
-				/*free(new_entry);*/
 				_exit(EXIT_FAILURE);
 			}
 			free(new_entry);
