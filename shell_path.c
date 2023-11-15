@@ -16,7 +16,7 @@ char *handle_path(char *entry)
 	path = getenv("PATH");
 	if (path)
 	{
-		path_dup = strdup(path);
+		path_dup = _strdup(path);
 		if (path_dup == NULL)
 		{
 			perror("strdup");
@@ -27,12 +27,12 @@ char *handle_path(char *entry)
 
 		while (dir != NULL)
 		{
-			new_path = malloc(strlen(dir) + strlen(entry) + 2);
+			new_path = malloc(_strlen(dir) + _strlen(entry) + 2);
 			if (new_path == NULL)
 				return (NULL);
-			strcpy(new_path, dir);
-			strcat(new_path, "/");
-			strcat(new_path, entry);
+			_strcpy(new_path, dir);
+			_strcat(new_path, "/");
+			_strcat(new_path, entry);
 
 			if (stat(new_path, &check) == 0)
 			{
@@ -50,7 +50,7 @@ char *handle_path(char *entry)
 
 			if (stat(entry, &check) == 0)
 			{
-				return (strdup(entry));
+				return (_strdup(entry));
 			}
 
 		return (NULL);

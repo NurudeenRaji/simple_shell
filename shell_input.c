@@ -19,18 +19,18 @@ char **shell_input(char *entry, size_t vol)
 	output = getline(&entry, &vol, stdin);
 	if (output == EOF)
 	{
-		/*fprintf(stderr, "Error reading input: %s\n", strerror(errno));*/
+		/*perror("Error reading input");*/
 		exit(EXIT_FAILURE);
 	}
 
-	entry[strcspn(entry, "\n")] = '\0';
+	entry[_strcspn(entry, "\n")] = '\0';
 
 	if (entry[0] == '\0')
 	{
 		return (NULL);
 	}
 
-	entry_copy = strdup(entry);
+	entry_copy = _strdup(entry);
 	if (entry_copy == NULL)
 	{
 		perror("strdup");
@@ -56,13 +56,13 @@ char **shell_input(char *entry, size_t vol)
 	i = 0;
 	while (token != NULL)
 	{
-		args[i] = malloc(sizeof(char) * (strlen(token) + 1));
+		args[i] = malloc(sizeof(char) * (_strlen(token) + 1));
 		if (args[i] == NULL)
 		{
 			perror("malloc");
 			exit(EXIT_FAILURE);
 		}
-		strcpy(args[i], token);
+		_strcpy(args[i], token);
 		i++;
 		token = strtok(NULL, " ");
 	}

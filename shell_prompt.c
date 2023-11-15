@@ -8,6 +8,6 @@ void shell_prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		_printf("#Raji~Manass!$ ");
+		_print("#Raji~Manass!$ ");
 	}
 }

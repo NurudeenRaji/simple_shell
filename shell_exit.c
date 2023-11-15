@@ -12,7 +12,7 @@ void exit_shell(char **args)
 
 	if (args != NULL && args[0] != NULL)
 	{
-		if (strcmp(args[0], "exit") == 0)
+		if (_strcmp(args[0], "exit") == 0)
 		{
 			status = 0;
 			if (args[1] != NULL)
