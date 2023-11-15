@@ -8,9 +8,10 @@
  * Return: 0 success
  */
 
-int main(int ac, char **av)
+int main(int ac, char **av, char **env)
 {
 	char *input = NULL;
+	char **args = NULL;
 	size_t size = 0;
 
 	(void)ac;
@@ -19,7 +20,8 @@ int main(int ac, char **av)
 	while (true)
 	{
 		shell_prompt();
-		shell_input(input, size);
+		args = shell_input(input, size);
+		print_env(args, env);
 
 		free(input);
 		input = NULL;

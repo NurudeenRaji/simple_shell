@@ -3,14 +3,12 @@
 /**
  * print_env - A function that get the environment
  * @args: An input argument
+ * @env: the environment variable from main function.
  */
 
-extern char **environ;
-
-void print_env(char **args)
+void print_env(char **args, char **env)
 {
 	int i, j;
-	char **env = environ;
 
 	j = 0;
 	while (args != NULL && args[j] != NULL)
@@ -21,7 +19,7 @@ void print_env(char **args)
 			while (env[i] != NULL)
 			{
 				printf("%s\n", env[i]);
-				i++;
+			i++;
 			}
 		}
 		j++;

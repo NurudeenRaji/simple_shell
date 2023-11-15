@@ -1,18 +1,20 @@
 #include "shell.h"
 
-void shell_input(char *entry, size_t vol);
+char **shell_input(char *entry, size_t vol);
 
 /**
  * shell_input - Interpretes user input from shell input.
  * @entry: User input
  * @vol: Size of command
+ *
+ * Return: return the processed input;
  */
 
-void shell_input(char *entry, size_t vol)
+char **shell_input(char *entry, size_t vol)
 {
 	char **args, *token, *entry_copy;
 	ssize_t output;
-	int i, j, count;
+	int i, count;
 
 	output = getline(&entry, &vol, stdin);
 	if (output == EOF)
@@ -25,7 +27,7 @@ void shell_input(char *entry, size_t vol)
 
 	if (entry[0] == '\0')
 	{
-		return;
+		return (NULL);
 	}
 
 	entry_copy = strdup(entry);
@@ -70,10 +72,11 @@ void shell_input(char *entry, size_t vol)
 	free(entry_copy);
 
 	shell_execute(args);
-	print_env(args);
+	/*print_env(args);*/
 
+	return (args);
 
-	for (j = 0; j < i; j++)
+	/*for (j = 0; j < i; j++)
 		free(args[j]);
-	free(args);
+	free(args);*/
 }
