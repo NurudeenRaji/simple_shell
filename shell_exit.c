@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * exit_shell - A function that exit a program when
+ * the exit comand is giving as arguments.
+ * @args: Argument giving
+ */
+
 void exit_shell(char **args)
 {
 	int status, j;

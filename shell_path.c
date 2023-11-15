@@ -1,5 +1,11 @@
 #include "shell.h"
 
+/**
+ * handle_path - A function that handle all the path arguments to the program
+ * @entry: The user input entry
+ * Return: NULL
+ */
+
 char *handle_path(char *entry);
 
 char *handle_path(char *entry)
@@ -31,7 +37,7 @@ char *handle_path(char *entry)
 			if (stat(new_path, &check) == 0)
 			{
 				free(path_dup);
-				return(new_path);
+				return (new_path);
 			}
 			else
 			{
@@ -44,7 +50,7 @@ char *handle_path(char *entry)
 
 			if (stat(entry, &check) == 0)
 			{
-				return strdup(entry);
+				return (strdup(entry));
 			}
 
 		return (NULL);

@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * shell_execute - A function that exicute a giving argument
+ * @args: A giving arguments to exicute
+ */
+
 void shell_execute(char **args);
 
 void shell_execute(char **args)
@@ -22,7 +27,8 @@ void shell_execute(char **args)
 		new_entry = handle_path(entry);
 		if (new_entry == NULL)
 		{
-			fprintf(stderr, "hsh: Invalid command or '%s' path not handled!!! \n", entry);
+			fprintf(stderr, "hsh: Invalid command or '%s'
+					path not handled!!! \n", entry);
 			return;
 		}
 	}

@@ -3,7 +3,7 @@
 void shell_input(char *entry, size_t vol);
 
 /**
- * shell_interpreter - Interpretes user input from shell input.
+ * shell_input - Interpretes user input from shell input.
  * @entry: User input
  * @vol: Size of command
  */
