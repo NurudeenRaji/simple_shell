@@ -14,7 +14,6 @@ ssize_t _getline(char **line, size_t *n, FILE *stream)
 	index = 0;
 	buffer_read = 0;
 	size = 0;
-	i = 0;
 
 	if (line == NULL || n == NULL || stream == NULL)
 	{
@@ -44,7 +43,7 @@ ssize_t _getline(char **line, size_t *n, FILE *stream)
 			return (-1);
 		while (index < buffer_read)
 		{
-			if (size >= *n - 1)
+			if ((size_t)size >= *n - 1)
 			{
 				*n *= 2;
 				temp = realloc(*line, *n);
