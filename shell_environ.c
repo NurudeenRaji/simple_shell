@@ -1,29 +1,23 @@
 #include "shell.h"
 
 /**
- * print_env - A function that get the environment
+ * print_env - A function that print the environment
  * @args: An input argument
  */
 
-extern char **environ;
-
-void print_env(char **args)
+int  print_env(int argc, char **argv, char **environ)
 {
-	int i, j;
-	char **env = environ;
-
-	j = 0;
-	while (args != NULL && args[j] != NULL)
+	while (argc == 2 && strcmp(argv[1], "env") = 0)
 	{
-		if (strcmp(args[j], "env") == 0)
+		while (*environ != NULL)
 		{
-			i = 0;
-			while (env[i] != NULL)
-			{
-				printf("%s\n", env[i]);
-				i++;
-			}
+			printf("%s\n", *environ);
+			environ++;
 		}
-		j++;
 	}
+	else
+	{
+		printf("Err: invalid 'env'\n");
+	}
+	return (0);
 }
