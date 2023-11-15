@@ -24,6 +24,8 @@ int main(int ac, char **av, char **env)
 		print_env(args, env);
 
 		free(input);
+		free(args);
+		args = NULL;
 		input = NULL;
 	}
 

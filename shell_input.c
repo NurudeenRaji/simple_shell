@@ -72,7 +72,6 @@ char **shell_input(char *entry, size_t vol)
 	free(entry_copy);
 
 	shell_execute(args);
-	/*print_env(args);*/
 
 	return (args);
 

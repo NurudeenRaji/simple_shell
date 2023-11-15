@@ -19,9 +19,16 @@ void print_env(char **args, char **env)
 			while (env[i] != NULL)
 			{
 				printf("%s\n", env[i]);
-			i++;
+				i++;
 			}
 		}
 		j++;
 	}
+
+	while (args[j] !=  NULL)
+	{
+                free(args[j]);
+		j++;
+	}
+        free(args);
 }
