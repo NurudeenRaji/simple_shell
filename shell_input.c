@@ -74,8 +74,4 @@ char **shell_input(char *entry, size_t vol)
 	shell_execute(args);
 
 	return (args);
-
-	/*for (j = 0; j < i; j++)
-		free(args[j]);
-	free(args);*/
 }

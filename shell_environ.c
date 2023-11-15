@@ -25,10 +25,5 @@ void print_env(char **args, char **env)
 		j++;
 	}
 
-	while (args[j] !=  NULL)
-	{
-                free(args[j]);
-		j++;
-	}
-        free(args);
+        /*free(args);*/
 }

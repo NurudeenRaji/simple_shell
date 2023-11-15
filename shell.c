@@ -13,6 +13,7 @@ int main(int ac, char **av, char **env)
 	char *input = NULL;
 	char **args = NULL;
 	size_t size = 0;
+	int i;
 
 	(void)ac;
 	(void)av;
@@ -21,11 +22,21 @@ int main(int ac, char **av, char **env)
 	{
 		shell_prompt();
 		args = shell_input(input, size);
-		print_env(args, env);
+		
+		if (args != NULL)
+		{
+			print_env(args, env);
+
+			i = 0;
+			while (args[i] != NULL)
+			{
+				free(args[i]);
+				i++;
+			}
+			free(args);
+		}
 
 		free(input);
-		free(args);
-		args = NULL;
 		input = NULL;
 	}
 
