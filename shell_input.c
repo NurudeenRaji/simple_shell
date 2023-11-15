@@ -17,9 +17,8 @@ char **shell_input(char *entry, size_t vol)
 	int i, count;
 
 	output = getline(&entry, &vol, stdin);
-	if (output == EOF)
+	if (output == -1)
 	{
-		/*perror("Error reading input");*/
 		exit(EXIT_FAILURE);
 	}
 

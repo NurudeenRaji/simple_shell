@@ -27,7 +27,7 @@ void shell_execute(char **args)
 		new_entry = handle_path(entry);
 		if (new_entry == NULL)
 		{
-			perror("Error executing command");
+			perror("./shell");
 			return;
 		}
 	}
