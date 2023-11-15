@@ -2,6 +2,16 @@
 
 #define BUFFER_SIZE 1024
 
+/**
+ * _getline - A function thatget a line fro a giving input
+ * @line: A string input line
+ * @stream: File to stream path from
+ * @n: Number of a giving input
+ * Return: Size of input
+ */
+
+ssize_t _getline(char **line, size_t *n, FILE *stream);
+
 ssize_t _getline(char **line, size_t *n, FILE *stream)
 {
 	static char buffer[BUFFER_SIZE];
@@ -38,7 +48,7 @@ ssize_t _getline(char **line, size_t *n, FILE *stream)
 			break;
 		index = 0;
 		}
-	
+
 		if (buffer_read == -1)
 			return (-1);
 		while (index < buffer_read)

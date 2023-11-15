@@ -1,5 +1,13 @@
 #include "shell.h"
 
+/**
+ * main - A function that take all the input argument
+ * frome all the progran function
+ * @ac: An argument count
+ * @av: An input argument value
+ * Return: 0 success
+ */
+
 int main(int ac, char **av)
 {
 	char *input = NULL;

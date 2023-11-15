@@ -1,5 +1,10 @@
 #include "shell.h"
 
+/**
+ * print_env - A function that get the environment
+ * @args: An input argument
+ */
+
 extern char **environ;
 
 void print_env(char **args)
