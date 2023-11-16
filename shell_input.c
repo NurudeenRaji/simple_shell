@@ -6,7 +6,7 @@ char **shell_input(char *entry, size_t vol, char **env);
  * shell_input - Interpretes user input from shell input.
  * @entry: User input
  * @vol: Size of command
- *
+ * @env: The environment to input
  * Return: return the processed input;
  */
 
