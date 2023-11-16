@@ -1,6 +1,6 @@
 #include "shell.h"
 
-char **shell_input(char *entry, size_t vol);
+char **shell_input(char *entry, size_t vol, char **env);
 
 /**
  * shell_input - Interpretes user input from shell input.
@@ -10,17 +10,17 @@ char **shell_input(char *entry, size_t vol);
  * Return: return the processed input;
  */
 
-char **shell_input(char *entry, size_t vol)
+char **shell_input(char *entry, size_t vol, char **env)
 {
 	char **args, *token, *entry_copy;
 	ssize_t output;
 	int i, count;
 
 	output = getline(&entry, &vol, stdin);
-	if (output == EOF)
+	if (output == -1)
 	{
-		/*perror("Error reading input");*/
-		exit(EXIT_FAILURE);
+		free(entry);
+		return (NULL);
 	}
 
 	entry[_strcspn(entry, "\n")] = '\0';
@@ -71,7 +71,7 @@ char **shell_input(char *entry, size_t vol)
 	free(entry);
 	free(entry_copy);
 
-	shell_execute(args);
+	shell_execute(args, env);
 
 	return (args);
 }

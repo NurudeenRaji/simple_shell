@@ -22,7 +22,7 @@ int main(int ac, char **av, char **env)
 	while (true)
 	{
 		shell_prompt();
-		args = shell_input(input, size);
+		args = shell_input(input, size, env);
 
 		if (args != NULL)
 		{
@@ -35,6 +35,11 @@ int main(int ac, char **av, char **env)
 				i++;
 			}
 			free(args);
+		}
+		else
+		{
+			free(input);
+			break;
 		}
 
 		free(input);

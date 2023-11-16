@@ -13,8 +13,8 @@
 
 void _print(const char *str);
 void shell_prompt(void);
-char **shell_input(char *entry, size_t vol);
-void shell_execute(char **args);
+char **shell_input(char *entry, size_t vol, char **env);
+void shell_execute(char **args, char **env);
 char *handle_path(char *entry);
 void print_env(char **args, char **env);
 void exit_shell(char **args);

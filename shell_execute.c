@@ -5,9 +5,9 @@
  * @args: A giving arguments to exicute
  */
 
-void shell_execute(char **args);
+void shell_execute(char **args, char **env);
 
-void shell_execute(char **args)
+void shell_execute(char **args, char **env)
 {
 	pid_t pid;
 	int status;
@@ -27,11 +27,10 @@ void shell_execute(char **args)
 		new_entry = handle_path(entry);
 		if (new_entry == NULL)
 		{
-			perror("Error executing command");
+			perror("./shell");
 			return;
 		}
 	}
-
 
 	pid = fork();
 
@@ -40,11 +39,11 @@ void shell_execute(char **args)
 		perror("Fork");
 		exit(EXIT_FAILURE);
 	}
-	else if (pid == 0)
+	if (pid == 0)
 	{
 		if (new_entry != NULL)
 		{
-			if (execve(new_entry, args, NULL) == -1)
+			if (execve(new_entry, args, env) == -1)
 			{
 				perror("execve failed");
 				free(new_entry);
