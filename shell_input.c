@@ -1,33 +1,33 @@
 #include "shell.h"
 
-char **shell_input(char *entry, size_t vol, char **env);
+void shell_input(char *entry, size_t vol, char **env);
 
 /**
  * shell_input - Interpretes user input from shell input.
  * @entry: User input
  * @vol: Size of command
- * @env: The environment to input
- * Return: return the processed input;
+ * @env: The environment to input.
  */
 
-char **shell_input(char *entry, size_t vol, char **env)
+void shell_input(char *entry, size_t vol, char **env)
 {
 	char **args, *token, *entry_copy;
 	ssize_t output;
-	int i, count;
+	int i, j, count;
 
 	output = getline(&entry, &vol, stdin);
-	if (output == -1)
+	if (output == EOF)
 	{
 		free(entry);
-		return (NULL);
+		exit(0);
 	}
 
 	entry[_strcspn(entry, "\n")] = '\0';
 
 	if (entry[0] == '\0')
 	{
-		return (NULL);
+		free(entry);
+		return;
 	}
 
 	entry_copy = _strdup(entry);
@@ -71,7 +71,16 @@ char **shell_input(char *entry, size_t vol, char **env)
 	free(entry);
 	free(entry_copy);
 
-	shell_execute(args, env);
+	if (_strcmp(args[0], "env") == 0)
+		print_env(args, env);
+	else
+		shell_execute(args, env);
 
-	return (args);
+	j = 0;
+	while (args[j] != NULL)
+	{
+		free(args[j]);
+		j++;
+	}
+	free(args);
 }

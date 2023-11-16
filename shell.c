@@ -12,35 +12,18 @@
 int main(int ac, char **av, char **env)
 {
 	char *input = NULL;
-	char **args = NULL;
 	size_t size = 0;
-	int i;
 
 	(void)ac;
 	(void)av;
 
+	if (signal(SIGINT, signal_handler) == SIG_ERR)
+		return (EXIT_FAILURE);
+
 	while (true)
 	{
 		shell_prompt();
-		args = shell_input(input, size, env);
-
-		if (args != NULL)
-		{
-			print_env(args, env);
-
-			i = 0;
-			while (args[i] != NULL)
-			{
-				free(args[i]);
-				i++;
-			}
-			free(args);
-		}
-		else
-		{
-			free(input);
-			break;
-		}
+		shell_input(input, size, env);
 
 		free(input);
 		input = NULL;

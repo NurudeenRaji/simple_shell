@@ -1,12 +1,12 @@
 #include "shell.h"
 
+void shell_execute(char **args, char **env);
+
 /**
  * shell_execute - A function that exicute a giving argument
- * @args: A giving arguments to exicute
+ * @args: A giving arguments to execute
  * @env: The environment to execute
  */
-
-void shell_execute(char **args, char **env);
 
 void shell_execute(char **args, char **env)
 {
@@ -19,16 +19,14 @@ void shell_execute(char **args, char **env)
 	exit_shell(args);
 
 	if (args != NULL)
-	{
 		entry = args[0];
-	}
 
 	if (entry != NULL)
 	{
 		new_entry = handle_path(entry);
 		if (new_entry == NULL)
 		{
-			perror("./shell");
+			free(new_entry);
 			return;
 		}
 	}
@@ -38,6 +36,7 @@ void shell_execute(char **args, char **env)
 	if (pid < 0)
 	{
 		perror("Fork");
+		free(new_entry);
 		exit(EXIT_FAILURE);
 	}
 	if (pid == 0)
@@ -50,7 +49,6 @@ void shell_execute(char **args, char **env)
 				free(new_entry);
 				_exit(EXIT_FAILURE);
 			}
-			/*free(new_entry);*/
 		}
 	}
 	else

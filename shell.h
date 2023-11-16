@@ -13,11 +13,12 @@
 
 void _print(const char *str);
 void shell_prompt(void);
-char **shell_input(char *entry, size_t vol, char **env);
+void shell_input(char *entry, size_t vol, char **env);
 void shell_execute(char **args, char **env);
 char *handle_path(char *entry);
 void print_env(char **args, char **env);
 void exit_shell(char **args);
+void signal_handler(int sig);
 ssize_t _getline(char **line, size_t *n, FILE *stream);
 
 char *_strcat(char *dest, char *src);
