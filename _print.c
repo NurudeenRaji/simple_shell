@@ -6,7 +6,7 @@
  * @fd: file descriptor to indicate in, out or err.
  */
 
-void _print(const char *str, int fd)
+void _print(const char *str)
 {
-	write(fd, str, _strlen(str));
+	write(STDOUT_FILENO, str, _strlen(str));
 }

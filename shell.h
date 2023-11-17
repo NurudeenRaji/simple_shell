@@ -11,7 +11,7 @@
 #include <sys/types.h>
 #include <errno.h>
 
-void _print(const char *str, int fd);
+void _print(const char *str);
 void shell_prompt(void);
 void shell_input(char *entry, size_t vol, char **env);
 void shell_execute(char **args, char **env);

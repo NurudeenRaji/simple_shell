@@ -8,6 +8,6 @@ void shell_prompt(void)
 {
 	if (isatty(STDIN_FILENO))
 	{
-		_print("$ ", 1);
+		_print("$ ");
 	}
 }

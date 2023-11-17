@@ -19,15 +19,12 @@ void exit_shell(char **args)
 			{
 				status = _atoi(args[1]);
 			}
-			else
-				status = 2;
-
-
 			for (j = 0; j < 2; j++)
 				free(args[j]);
 			free(args);
 
 			exit(status);
 		}
+		
 	}
 }
