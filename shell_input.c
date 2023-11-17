@@ -71,10 +71,8 @@ void shell_input(char *entry, size_t vol, char **env)
 	free(entry);
 	free(entry_copy);
 
-	if (_strcmp(args[0], "env") == 0)
-		print_env(args, env);
-	else
-		shell_execute(args, env);
+	print_env(args, env);
+	shell_execute(args, env);
 
 	j = 0;
 	while (args[j] != NULL)

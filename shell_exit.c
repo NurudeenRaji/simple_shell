@@ -25,6 +25,6 @@ void exit_shell(char **args)
 
 			exit(status);
 		}
-		
+
 	}
 }
