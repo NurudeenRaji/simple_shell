@@ -67,6 +67,30 @@ unsigned int _strcspn(char *s, char *reject)
 }
 
 /**
+ * _atoi - coverts string to integer
+ * @str: the string to be converted
+ * Return: the integer
+ */
+
+int _atoi(char *str)
+{
+	int result = 0, sign = 1, i = 0;
+
+	if (str[0] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		++i;
+	}
+
+	return (sign * result);
+}
+
+/**
  * _putchar - writes the character c to stdout
  * @c: The character to print
  *

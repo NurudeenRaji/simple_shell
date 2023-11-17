@@ -17,7 +17,7 @@ void exit_shell(char **args)
 			status = 0;
 			if (args[1] != NULL)
 			{
-				status = atoi(args[1]);
+				status = _atoi(args[1]);
 			}
 			for (j = 0; j < 2; j++)
 				free(args[j]);

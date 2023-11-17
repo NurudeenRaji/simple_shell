@@ -11,7 +11,7 @@
 #include <sys/types.h>
 #include <errno.h>
 
-void _print(const char *str);
+void _print(const char *str, int fd);
 void shell_prompt(void);
 void shell_input(char *entry, size_t vol, char **env);
 void shell_execute(char **args, char **env);
@@ -30,5 +30,6 @@ char *_strdup(char *str);
 int _strlen(const char *s);
 int _putchar(char c);
 void _puts(char *str);
+int _atoi(char *str);
 
 #endif

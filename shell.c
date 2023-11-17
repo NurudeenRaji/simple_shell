@@ -17,9 +17,6 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 
-	if (signal(SIGINT, signal_handler) == SIG_ERR)
-		return (EXIT_FAILURE);
-
 	while (true)
 	{
 		shell_prompt();

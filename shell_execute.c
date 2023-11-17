@@ -26,8 +26,10 @@ void shell_execute(char **args, char **env)
 		new_entry = handle_path(entry);
 		if (new_entry == NULL)
 		{
+			perror("not found");/*NOTE*/
 			free(new_entry);
 			return;
+			/*exit(EXIT_FAILURE);*/
 		}
 	}
 
